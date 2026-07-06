@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FlashcartApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlashcartApplication.class, args);
+        SpringApplication.run(FlashcartApplication.class, args);
 	}
 
 }

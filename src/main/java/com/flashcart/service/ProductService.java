@@ -44,4 +44,30 @@ public class ProductService {
         existing.setFlashSalePrice(updatedProduct.getFlashSalePrice());
         return productRepository.save(existing);
     }
+
+    public List<Product> getActiveFlashSaleProducts() {
+        return productRepository
+                .findByFlashSaleActive(true);
+    }
+
+
+    public List<Product> searchProducts(String keyword) {
+        return productRepository
+                .findByNameContainingIgnoreCase(keyword);
+    }
+
+
+    public List<Product> getProductsByPriceRange(
+            Double minPrice, Double maxPrice) {
+        return productRepository
+                .findByPriceBetween(minPrice, maxPrice);
+    }
+
+
+    public List<Product> getLowStockProducts(
+            Integer threshold) {
+        return productRepository
+                .findLowStockProducts(threshold);
+    }
+
 }

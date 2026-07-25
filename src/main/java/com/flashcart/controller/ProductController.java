@@ -47,14 +47,14 @@ public ResponseEntity<Product> getProductById(@PathVariable Long id) {
     return ResponseEntity.ok(productService.getProductById(id));
 }
 
-    @GetMapping("/search")
-    public String searchProducts(@RequestParam String keyword, @RequestParam(required = false, defaultValue = "price")
-    String sortBy)
-    {
-        return "Searching for: " + keyword +
-                " | Sorted by: " + sortBy;
-
-    }
+//    @GetMapping("/search")
+//    public String searchProducts(@RequestParam String keyword, @RequestParam(required = false, defaultValue = "price")
+//    String sortBy)
+//    {
+//        return "Searching for: " + keyword +
+//                " | Sorted by: " + sortBy;
+//
+//    }
 
     @PostMapping
     public ResponseEntity<Product> createProduct(
@@ -75,6 +75,44 @@ public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         productService.deleteProduct(id);
         return  ResponseEntity.noContent().build();
     }
+
+
+    @GetMapping("/flash-sale/active")
+    public ResponseEntity<List<Product>>
+    getActiveFlashSales() {
+        return ResponseEntity.ok(
+                productService.getActiveFlashSaleProducts());
+    }
+
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchProducts(
+            @RequestParam String keyword) {
+        return ResponseEntity.ok(
+                productService.searchProducts(keyword));
+    }
+
+
+    @GetMapping("/filter/price")
+    public ResponseEntity<List<Product>>
+    getProductsByPriceRange(
+            @RequestParam Double minPrice,
+            @RequestParam Double maxPrice) {
+        return ResponseEntity.ok(
+                productService.getProductsByPriceRange(
+                        minPrice, maxPrice));
+    }
+
+
+
+    @GetMapping("/admin/low-stock")
+    public ResponseEntity<List<Product>>
+    getLowStockProducts(
+            @RequestParam(defaultValue = "5") Integer threshold) {
+        return ResponseEntity.ok(
+                productService.getLowStockProducts(threshold));
+    }
+
 
 }
 

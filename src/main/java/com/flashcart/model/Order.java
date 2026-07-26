@@ -1,12 +1,10 @@
 package com.flashcart.model;
 
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -29,7 +27,6 @@ public class Order {
             nullable = false)
     private Product product;
 
-
     @Column(nullable = false)
     private Integer quantity;
 
@@ -43,5 +40,5 @@ public class Order {
     private String orderCode;
 
     @Column(nullable = false)
-    private java.time.LocalDateTime orderDate;
+    private LocalDateTime orderDate;
 }

@@ -2,29 +2,36 @@ package com.flashcart.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String name;
-    private String description;
-    private Double price;
-    private Integer stock;
-    private String imageUrl;
-    private boolean flashSaleActive;
-    private Double flashSalePrice;
+    private Long id;
 
-    @OneToMany(mappedBy = "product",
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String role;
+
+    @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Order> orders;

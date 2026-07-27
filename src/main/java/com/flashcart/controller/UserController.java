@@ -1,5 +1,7 @@
 package com.flashcart.controller;
 
+import com.flashcart.dto.UserRegistrationRequest;
+import com.flashcart.dto.UserResponse;
 import com.flashcart.model.User;
 import com.flashcart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(
-            @RequestBody User user) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(userService.registerUser(user));
+    public ResponseEntity<UserResponse> register(
+            @RequestBody UserRegistrationRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerUser(request));
     }
 }

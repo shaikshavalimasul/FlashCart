@@ -4,6 +4,7 @@ import com.flashcart.dto.UserRegistrationRequest;
 import com.flashcart.dto.UserResponse;
 import com.flashcart.model.User;
 import com.flashcart.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserResponse> register(
-            @RequestBody UserRegistrationRequest request) {
+            @Valid @RequestBody UserRegistrationRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerUser(request));
     }
 }
